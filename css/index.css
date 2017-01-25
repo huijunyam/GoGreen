@@ -1,0 +1,28 @@
+img {
+  display: block;
+  margin: 20px auto;
+  height: 100px;
+  width: 320px;
+}
+
+nav {
+  width: 240px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.splash {
+  background: black;
+}
+
+.splash-text {
+  font-size: 20px;
+  font-family: sans-serif;
+  color: black;
+}
+
+#canvas {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid black;
+}
