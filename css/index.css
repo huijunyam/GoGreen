@@ -11,11 +11,31 @@ nav {
   margin-bottom: 10px;
 }
 
-.splash {
-  background: black;
+.game-container {
+  /*position: relative;*/
+}
+
+#splash {
+  position: absolute;
+  opacity: 0.8;
+  background: grey;
+  width: 600px;
+  height: 250px;
+  margin: 150px 500px;
+}
+
+#win-splash, #lose-splash {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0.8;
+  background: grey;
+  width: 600px;
+  height: 250px;
+  margin: 150px 500px;
 }
 
 .splash-text {
+  text-align: center;
   font-size: 20px;
   font-family: sans-serif;
   color: black;

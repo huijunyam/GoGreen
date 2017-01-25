@@ -92,7 +92,7 @@
 	trashImg.src = "./images/start_ball.png";
 	
 	var trash = {
-	  speed: 100
+	  speed: 150
 	};
 	
 	var trashBin = {};
@@ -142,7 +142,7 @@
 	  if (39 in keysDown) {
 	    trash.x += trash.speed * modifier;
 	  }
-	  // debugger
+	
 	  //touching
 	  if (lives <= 0) {
 	    loss();
@@ -215,7 +215,7 @@
 	  ctx.font = "24px Helvetica";
 	  ctx.textAlign = "left";
 	  ctx.textBaseline = "top";
-	  ctx.fillText("Score: " + score, 32, 32);
+	  ctx.fillText("Score: " + score + " \n Lives: " + lives, 32, 32);
 	};
 	
 	var main = function main() {
@@ -234,14 +234,34 @@
 	  console.log("you lose");
 	  var loseSplash = document.getElementById("lose-splash");
 	  loseSplash.style.visibility = "visible";
+	  document.addEventListener("keydown", restart);
 	}
 	
 	function win() {
 	  console.log("you win");
 	  var winSplash = document.getElementById("win-splash");
+	  var victory = document.getElementById("victory");
+	  victory.innerHTML = "You have " + (score + 10) + " score";
 	  winSplash.style.visibility = "visible";
 	}
 	
+	function hideSplash() {
+	  var splash = document.getElementById("splash");
+	  splash.style.visibility = "hidden";
+	  // document.removeEventListener("keydown", hideSplash);
+	}
+	
+	function restart() {
+	  var loseSplash = document.getElementById("lose-splash");
+	  loseSplash.style.visibility = "hidden";
+	  level = 1;
+	  score = 0;
+	  lives = 3;
+	  // reset();
+	  // main();
+	}
+	
+	document.addEventListener("keydown", hideSplash);
 	var then = Date.now();
 	reset();
 	main();

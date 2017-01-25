@@ -48,7 +48,7 @@ trashImg.onload = () => {
 trashImg.src = "./images/start_ball.png";
 
 let trash = {
-  speed: 100
+  speed: 150
 };
 
 let trashBin = {};
@@ -98,7 +98,7 @@ let update = (modifier) => {
   if (39 in keysDown) {
     trash.x += trash.speed * modifier;
   }
-  // debugger
+
   //touching
   if (lives <= 0) {
     loss();
@@ -171,7 +171,7 @@ let render = () => {
 	ctx.font = "24px Helvetica";
 	ctx.textAlign = "left";
 	ctx.textBaseline = "top";
-	ctx.fillText("Score: " + score, 32, 32);
+	ctx.fillText(`Score: ${score} \n Lives: ${lives}`, 32, 32);
 };
 
 let main = () => {
@@ -190,14 +190,34 @@ function loss() {
   console.log("you lose");
   const loseSplash = document.getElementById("lose-splash");
   loseSplash.style.visibility = "visible";
+  document.addEventListener("keydown", restart);
 }
 
 function win() {
   console.log("you win");
   const winSplash = document.getElementById("win-splash");
+  const victory = document.getElementById("victory");
+  victory.innerHTML = `You have ${score + 10} score`;
   winSplash.style.visibility = "visible";
 }
 
+function hideSplash() {
+  const splash = document.getElementById("splash");
+  splash.style.visibility = "hidden";
+  // document.removeEventListener("keydown", hideSplash);
+}
+
+function restart() {
+  const loseSplash = document.getElementById("lose-splash");
+  loseSplash.style.visibility = "hidden";
+  level = 1;
+  score = 0;
+  lives = 3;
+  // reset();
+  // main();
+}
+
+document.addEventListener("keydown", hideSplash);
 let then = Date.now();
 reset();
 main();
