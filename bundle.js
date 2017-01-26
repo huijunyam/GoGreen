@@ -230,36 +230,54 @@
 	var w = window;
 	requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 	
-	function loss() {
+	var loss = function loss() {
 	  console.log("you lose");
 	  var loseSplash = document.getElementById("lose-splash");
 	  loseSplash.style.visibility = "visible";
-	  document.addEventListener("keydown", restart);
-	}
+	  document.addEventListener("keydown", function (e) {
+	    if (e.keyCode === 32) {
+	      restart();
+	    }
+	  });
+	};
 	
-	function win() {
+	// function lossRound() {
+	//   const levelSplash = document.getElementById("level-splash");
+	//   const levelHeader = document.getElementById("level-header");
+	//   levelHeader.innerHTML = `Please try again`;
+	//   lives -= 1;
+	//   levelSplash.style.visibility = "visible";
+	// }
+	
+	var win = function win() {
 	  console.log("you win");
 	  var winSplash = document.getElementById("win-splash");
 	  var victory = document.getElementById("victory");
 	  victory.innerHTML = "You have " + (score + 10) + " score";
 	  winSplash.style.visibility = "visible";
-	}
+	  document.addEventListener("keydown", function (e) {
+	    if (e.keyCode === 32) {
+	      restart();
+	    }
+	  });
+	};
 	
-	function hideSplash() {
+	var hideSplash = function hideSplash() {
 	  var splash = document.getElementById("splash");
 	  splash.style.visibility = "hidden";
-	  // document.removeEventListener("keydown", hideSplash);
-	}
+	};
 	
-	function restart() {
+	var restart = function restart() {
 	  var loseSplash = document.getElementById("lose-splash");
 	  loseSplash.style.visibility = "hidden";
+	  var winSplash = document.getElementById("win-splash");
+	  winSplash.style.visibility = "hidden";
 	  level = 1;
 	  score = 0;
 	  lives = 3;
-	  // reset();
-	  // main();
-	}
+	  reset();
+	  main();
+	};
 	
 	document.addEventListener("keydown", hideSplash);
 	var then = Date.now();

@@ -186,38 +186,62 @@ let main = () => {
 let w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
-function loss() {
+let loss = () => {
   console.log("you lose");
   const loseSplash = document.getElementById("lose-splash");
   loseSplash.style.visibility = "visible";
-  document.addEventListener("keydown", restart);
-}
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 32) {
+      restart();
+    }
+  });
+};
 
-function win() {
+// function lossRound() {
+//   const levelSplash = document.getElementById("level-splash");
+//   const levelHeader = document.getElementById("level-header");
+//   levelHeader.innerHTML = `Please try again`;
+//   lives -= 1;
+//   levelSplash.style.visibility = "visible";
+// }
+
+let win = () => {
   console.log("you win");
   const winSplash = document.getElementById("win-splash");
   const victory = document.getElementById("victory");
   victory.innerHTML = `You have ${score + 10} score`;
   winSplash.style.visibility = "visible";
-}
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 32) {
+      restart();
+    }
+  });
+};
 
-function hideSplash() {
+let hideSplash = () => {
   const splash = document.getElementById("splash");
   splash.style.visibility = "hidden";
-  // document.removeEventListener("keydown", hideSplash);
-}
 
-function restart() {
+};
+
+let restart = () => {
   const loseSplash = document.getElementById("lose-splash");
   loseSplash.style.visibility = "hidden";
+  const winSplash = document.getElementById("win-splash");
+  winSplash.style.visibility = "hidden";
   level = 1;
   score = 0;
   lives = 3;
-  // reset();
-  // main();
-}
+  reset();
+  main();
+};
+
 
 document.addEventListener("keydown", hideSplash);
 let then = Date.now();
 reset();
 main();
+
+start_game() {
+  
+}

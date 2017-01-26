@@ -24,7 +24,7 @@ nav {
   margin: 150px 500px;
 }
 
-#win-splash, #lose-splash {
+#win-splash, #lose-splash, #level-splash {
   visibility: hidden;
   position: absolute;
   opacity: 0.8;
