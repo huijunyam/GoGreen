@@ -1,43 +1,59 @@
-# Go Green
+#Go Green
+
+##Link
+
+![image of game design](./images/game_design.png)
 
 ##Background
-Go Green is an educational game that teaches people how to sort and recycle the trash correctly. The game is designed based on the soccer game theme. There will be three bins labeled as trash, compost, and recycle setting up in front of the player. The player will click on the correct bin according to the trash shown. The user will use mouse to click the correct bin. A scoreboard will display the score of the player based on the correct sorted trash.  
+Go Green is an educational game that teaches people how to sort and recycle the trash correctly. The game is designed based on the soccer game theme. There will be three bins labeled as trash, compost, and recycle setting up in front of the player. The users will use keypad(up, down, left, right) to control and move the trash into the correct bin. A scoreboard will display the score of the player based on the correct sorted trash.  
 
-##Functionality & MVP
-- [ ] Randomly generated trash positioned in front of player
-- [ ] Player able to kick the trash to the direction set by player
-
-In addition, this project will include:
-- [ ] An About modal describing the background and rules of the game
-- [ ] A production README
-
-##Wireframes
-This app will consist of a single screen with game board and nav links to the Github, LinkedIn, About modal, and game controls. The About modal will show the background and rules of the game and the game controls will show the keys that are required in this game. The start, pause, reset buttons as well as the score board will be displayed on the game board during the game.
-
-![image of game layout](game_layout.png)
+For more information about the recyclable items, please visit this [recycle list] (https://www.buffalo.edu/recycling/recyclable.htm)
 
 ##Architecture and Technologies
-This project will be implemented with the following technologies:
-- Vanilla Javascript  and jQuery for game logic and structure
+Go Green is created with Javascript, HTML5, CSS3, and `howler.js`
+- Vanilla Javascript for game logic and structure
 - Javascript Canvas for DOM Manipulation and rendering
-- Webpack to bundle all the scripts file
+- `howler.js` for playing audio
+- Webpack for bundling all the scripts file
 
-There will be additional script files such as:
-`trash.js`: this script will handle all the type of trash object and have necessary function to check the type of the trash and rendering them into DOM
+##Implementation
+Go Green uses the HTML Canvas to draw graphics via Javascript. It uses `requestAnimationFrame` to constantly render and update the canvas to provide animation for the game.
+```
+let w = window;
+requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame ||
+w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+```
 
-`game.js`: this.script will handle all the game logic during the game play
+The splash page will be rendered when the users win or lose the game by manipulating the visibility style in CSS to visible and manipulated the DOM element by adding winning or losing messages using innerHTML tag.
+```
+let win = () => {
+  const winSplash = document.getElementById("win-splash");
+  const victory = document.getElementById("victory");
+  victory.innerHTML = `You have a score of ${score + 10}`;
+  winSplash.style.visibility = "visible";
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 32) {
+      const winSplashMessage = document.getElementById("win-splash");
+      winSplashMessage.style.visibility = "hidden";
+      restart();
+    }
+  });
+};
+```
 
-##Implementation Timeline
-**Day 1:** Setup all the necessary Node modules and get webpack up by creating `webpack.config.js` and `package.json`. Learn the basic of Canvas to render the canvas element. Complete the index.html and entry file.
+Go Green uses `howler.js` to create the sound effect if users sort the trash correctly or wrongly.
+```
+let savedAudio = new Howl({
+  src: ['./sounds/ball_saved.mp3']
+});
 
-**Day 2:** Setup the trash objects in `trash.js` and able to render all types of trash into the canvas and make the trash clickable. Complete all the necessary function for trash object.
+let goalAudio = new Howl({
+  src: ['./sounds/goal.mp3']
+});
+```
 
-**Day 3:** Setup all the game logic in `game.js` and handle all the key events that are necessary to play the game. Setup the score board and about modal.
-
-**Day 4:** Install all the necessary controls such as start, pause, and reset button. Style the frontend of the webpage. Complete the production readme
-
-##Bonus features
-- [ ] goalkeeper able to catch the trash that was kicked by player
-- [ ] Randomly generated bomb that can kill the goalkeeper for few seconds
-- [ ] Difficulty is increased by the score of the player
-- [ ] A slider that can toggle between different themes such as basketball or football (original theme)
+##Future Plan
+My future plan for this project include the following features:
+- Randomly generated bomb that can stop the movement of goalkeeper for few seconds
+- Difficulty is increased by the score of the player
+- A slider that can toggle between different themes such as basketball or football (original theme)
