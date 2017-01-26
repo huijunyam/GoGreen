@@ -16,7 +16,6 @@ let trashBin = {};
 let compostBin = {};
 let recycleBin = {};
 let trashText = {};
-let monster = {};
 let score = 0;
 let level = 1;
 let lives = 3;
@@ -69,6 +68,10 @@ let trash = {
   speed: 150
 };
 
+let monster = {
+  speed: 50
+};
+
 addEventListener("keydown", (e) => {
   keysDown[e.keyCode] = true;
 }, false);
@@ -89,7 +92,7 @@ let reset = () => {
   trashText.x = 600;
   trashText.y = 480;
   monster.x = 600;
-  monster.y = 300;
+  monster.y = 150;
 };
 
 let update = (modifier) => {
@@ -101,14 +104,24 @@ let update = (modifier) => {
   }
   if (37 in keysDown) {
     trash.x -= trash.speed * modifier;
+    monster.x -= monster.speed * modifier;
   }
   if (39 in keysDown) {
     trash.x += trash.speed * modifier;
+    monster.x += monster.speed * modifier;
+
   }
 
   //touching
   if (lives <= 0) {
     loss();
+  }
+
+  if (monster.x === trash.x && monster.y === (trash.y + 50)) {
+    if (lives > 0) {
+      --lives;
+      reset();
+    }
   }
 
   if (trash.x < 565 && trash.x > 300 && trash.y >= 40 && trash.y <= 250) {
@@ -168,6 +181,9 @@ let render = () => {
   }
   if (recycleBinReady) {
     ctx.drawImage(recycleBinImg, recycleBin.x, recycleBin.y, recycleBinImg.width*0.33, recycleBinImg.height*0.34);
+  }
+  if (monsterReady) {
+    ctx.drawImage(monsterImg, monster.x, monster.y);
   }
   if (trashReady) {
     ctx.drawImage(trashImg, trash.x, trash.y, trashImg.width*0.3, trashImg.height*0.3);

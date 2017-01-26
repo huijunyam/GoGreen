@@ -60,7 +60,6 @@
 	var compostBin = {};
 	var recycleBin = {};
 	var trashText = {};
-	var monster = {};
 	var score = 0;
 	var level = 1;
 	var lives = 3;
@@ -113,6 +112,10 @@
 	  speed: 150
 	};
 	
+	var monster = {
+	  speed: 50
+	};
+	
 	addEventListener("keydown", function (e) {
 	  keysDown[e.keyCode] = true;
 	}, false);
@@ -133,7 +136,7 @@
 	  trashText.x = 600;
 	  trashText.y = 480;
 	  monster.x = 600;
-	  monster.y = 300;
+	  monster.y = 150;
 	};
 	
 	var update = function update(modifier) {
@@ -145,14 +148,23 @@
 	  }
 	  if (37 in keysDown) {
 	    trash.x -= trash.speed * modifier;
+	    monster.x -= monster.speed * modifier;
 	  }
 	  if (39 in keysDown) {
 	    trash.x += trash.speed * modifier;
+	    monster.x += monster.speed * modifier;
 	  }
 	
 	  //touching
 	  if (lives <= 0) {
 	    loss();
+	  }
+	
+	  if (monster.x === trash.x && monster.y === trash.y + 50) {
+	    if (lives > 0) {
+	      --lives;
+	      reset();
+	    }
 	  }
 	
 	  if (trash.x < 565 && trash.x > 300 && trash.y >= 40 && trash.y <= 250) {
@@ -212,6 +224,9 @@
 	  }
 	  if (recycleBinReady) {
 	    ctx.drawImage(recycleBinImg, recycleBin.x, recycleBin.y, recycleBinImg.width * 0.33, recycleBinImg.height * 0.34);
+	  }
+	  if (monsterReady) {
+	    ctx.drawImage(monsterImg, monster.x, monster.y);
 	  }
 	  if (trashReady) {
 	    ctx.drawImage(trashImg, trash.x, trash.y, trashImg.width * 0.3, trashImg.height * 0.3);
