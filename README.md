@@ -21,7 +21,7 @@ Go Green uses the HTML Canvas to draw graphics via Javascript. It uses `requestA
 ```
 let w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame ||
-w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+                        w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 ```
 
 The splash page will be rendered when the users win or lose the game by manipulating the visibility style in CSS to visible and manipulated the DOM element by adding winning or losing messages using innerHTML tag.
