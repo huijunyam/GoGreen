@@ -1,6 +1,6 @@
 #Go Green
 
-##Link
+[Go Green](https://huijunyam.github.io/GoGreen/)
 
 ![image of game design](./images/game_design.png)
 
