@@ -134,8 +134,8 @@
 	  recycleBin.x = 810;
 	  recycleBin.y = 40;
 	  trashText.x = 600;
-	  trashText.y = 480;
-	  monster.x = 600;
+	  trashText.y = 460;
+	  monster.x = 650;
 	  monster.y = 150;
 	};
 	
