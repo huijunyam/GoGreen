@@ -46,15 +46,26 @@
 
 	"use strict";
 	
-	var trashArr = ["paper", "bananaSkin", "napkins", "aluminiumCan", "vegetable", "glassBottle", "motor oil cans", "aluminum foil", "styrofoam containers", "waxed/waterproof cardboard"];
-	var recycle = ["aluminiumCan", "paper", "glassBottle", "aluminum foil"];
-	var compost = ["bananaSkin", "vegetable"];
-	var waste = ["napkins", "motor oil cans", "styrofoam containers", "waxed/waterproof cardboard"];
+	var trashArr = ["paper", "banana_skin", "napkins", "aluminium_can", "vegetable", "glass_bottle", "motor_oil_can", "aluminum_foil", "styrofoam_containers", "waxed_waterproof_cardboard"];
+	var recycle = ["aluminium_can", "paper", "glass_bottle", "aluminum_foil"];
+	var compost = ["banana_skin", "vegetable"];
+	var waste = ["napkins", "motor_oil_can", "styrofoam_containers", "waxed_waterproof_cardboard"];
 	
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
 	canvas.width = 1350;
 	canvas.height = 500;
+	
+	var trashBin = {};
+	var compostBin = {};
+	var recycleBin = {};
+	var trashText = {};
+	var monster = {};
+	var score = 0;
+	var level = 1;
+	var lives = 3;
+	var keysDown = {};
+	var currentTrash = trashArr[level - 1];
 	
 	var bgReady = false;
 	var bgImage = new Image();
@@ -91,19 +102,16 @@
 	};
 	trashImg.src = "./images/start_ball.png";
 	
+	var monsterReady = false;
+	var monsterImg = new Image();
+	monsterImg.onload = function () {
+	  monsterReady = true;
+	};
+	monsterImg.src = "./images/gk_idle_0.png";
+	
 	var trash = {
 	  speed: 150
 	};
-	
-	var trashBin = {};
-	var compostBin = {};
-	var recycleBin = {};
-	var trashText = {};
-	var score = 0;
-	var level = 1;
-	var lives = 3;
-	var keysDown = {};
-	var currentTrash = trashArr[level - 1];
 	
 	addEventListener("keydown", function (e) {
 	  keysDown[e.keyCode] = true;
@@ -124,12 +132,11 @@
 	  recycleBin.y = 40;
 	  trashText.x = 600;
 	  trashText.y = 480;
+	  monster.x = 600;
+	  monster.y = 300;
 	};
 	
 	var update = function update(modifier) {
-	  // debugger
-	  console.log(level, trashArr[level - 1]);
-	  console.log(trash.x, trash.y);
 	  if (38 in keysDown) {
 	    trash.y -= trash.speed * modifier;
 	  }
@@ -241,19 +248,11 @@
 	  });
 	};
 	
-	// function lossRound() {
-	//   const levelSplash = document.getElementById("level-splash");
-	//   const levelHeader = document.getElementById("level-header");
-	//   levelHeader.innerHTML = `Please try again`;
-	//   lives -= 1;
-	//   levelSplash.style.visibility = "visible";
-	// }
-	
 	var win = function win() {
 	  console.log("you win");
 	  var winSplash = document.getElementById("win-splash");
 	  var victory = document.getElementById("victory");
-	  victory.innerHTML = "You have " + (score + 10) + " score";
+	  victory.innerHTML = "You have a score of " + (score + 10);
 	  winSplash.style.visibility = "visible";
 	  document.addEventListener("keydown", function (e) {
 	    if (e.keyCode === 32) {

@@ -1,16 +1,27 @@
 const trashArr = [
-      "paper", "bananaSkin", "napkins", "aluminiumCan", "vegetable", "glassBottle",
-       "motor oil cans", "aluminum foil", "styrofoam containers",
-      "waxed/waterproof cardboard"
+      "paper", "banana_skin", "napkins", "aluminium_can", "vegetable", "glass_bottle",
+      "motor_oil_can", "aluminum_foil", "styrofoam_containers",
+      "waxed_waterproof_cardboard"
     ];
-const recycle = ["aluminiumCan", "paper", "glassBottle", "aluminum foil"];
-const compost = ["bananaSkin", "vegetable"];
-const waste = ["napkins", "motor oil cans", "styrofoam containers", "waxed/waterproof cardboard"];
+const recycle = ["aluminium_can", "paper", "glass_bottle", "aluminum_foil"];
+const compost = ["banana_skin", "vegetable"];
+const waste = ["napkins", "motor_oil_can", "styrofoam_containers", "waxed_waterproof_cardboard"];
 
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 canvas.width = 1350;
 canvas.height = 500;
+
+let trashBin = {};
+let compostBin = {};
+let recycleBin = {};
+let trashText = {};
+let monster = {};
+let score = 0;
+let level = 1;
+let lives = 3;
+let keysDown = {};
+let currentTrash = trashArr[level - 1];
 
 let bgReady = false;
 let bgImage = new Image();
@@ -47,19 +58,16 @@ trashImg.onload = () => {
 };
 trashImg.src = "./images/start_ball.png";
 
+let monsterReady = false;
+let monsterImg = new Image();
+monsterImg.onload = () => {
+  monsterReady = true;
+};
+monsterImg.src = "./images/gk_idle_0.png";
+
 let trash = {
   speed: 150
 };
-
-let trashBin = {};
-let compostBin = {};
-let recycleBin = {};
-let trashText = {};
-let score = 0;
-let level = 1;
-let lives = 3;
-let keysDown = {};
-let currentTrash = trashArr[level - 1];
 
 addEventListener("keydown", (e) => {
   keysDown[e.keyCode] = true;
@@ -80,12 +88,11 @@ let reset = () => {
   recycleBin.y = 40;
   trashText.x = 600;
   trashText.y = 480;
+  monster.x = 600;
+  monster.y = 300;
 };
 
 let update = (modifier) => {
-  // debugger
-  console.log(level, trashArr[level - 1]);
-  console.log(trash.x, trash.y);
   if (38 in keysDown) {
     trash.y -= trash.speed * modifier;
   }
@@ -197,19 +204,11 @@ let loss = () => {
   });
 };
 
-// function lossRound() {
-//   const levelSplash = document.getElementById("level-splash");
-//   const levelHeader = document.getElementById("level-header");
-//   levelHeader.innerHTML = `Please try again`;
-//   lives -= 1;
-//   levelSplash.style.visibility = "visible";
-// }
-
 let win = () => {
   console.log("you win");
   const winSplash = document.getElementById("win-splash");
   const victory = document.getElementById("victory");
-  victory.innerHTML = `You have ${score + 10} score`;
+  victory.innerHTML = `You have a score of ${score + 10}`;
   winSplash.style.visibility = "visible";
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 32) {
@@ -221,7 +220,6 @@ let win = () => {
 let hideSplash = () => {
   const splash = document.getElementById("splash");
   splash.style.visibility = "hidden";
-
 };
 
 let restart = () => {
@@ -236,12 +234,7 @@ let restart = () => {
   main();
 };
 
-
 document.addEventListener("keydown", hideSplash);
 let then = Date.now();
 reset();
 main();
-
-start_game() {
-  
-}

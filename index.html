@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Go Green</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
     <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
@@ -22,16 +24,20 @@
       <div id="splash">
         <div class="splash-text">
           <h1 class="level"></h1>
-          <h2>Swipe the trash into the right bin</h2>
+          <h2>Move the trash to the correct bin</h2>
           <h2>Press any key to begin</h2>
+          <br>
+          <h2>Use these keys to control the movement of trash</h2>
+          <img src="./images/keyboardArrows.png"></img>
         </div>
       </div>
       <div id="win-splash">
         <div class="splash-text">
           <h1>Well done</h1>
           <h2>You have successfully completed the tutorial</h2>
-          <h2>Press space bar to play again</h2>
           <h2 id="victory"><h2>
+          <br>
+          <h2>Press space bar to play again</h2>
         </div>
       </div>
       <div id="lose-splash">
@@ -52,7 +58,6 @@
     </div>
 
     <script type="application/javascript" src="bundle.js"></script>
-    <link rel="stylesheet" href="./css/index.css">
 
   </body>
 </html>
