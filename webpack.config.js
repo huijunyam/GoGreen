@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './go_green.js',
+  entry: './lib/go_green.js',
   output: {
-    filename: './bundle.js',
+    filename: './lib/bundle.js',
   },
   module: {
     loaders: [
