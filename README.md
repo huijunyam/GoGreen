@@ -47,7 +47,7 @@ let clickHandler = () => {
 };
 ```
 ```
-//condition checking the sound shoud be muted or played
+//condition checking the sound should be muted or played
 if (elementIsClicked === true) {
           goalAudio.mute();
         } else {
