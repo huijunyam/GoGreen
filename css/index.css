@@ -27,6 +27,20 @@ nav {
   /*position: relative;*/
 }
 
+#muteButton, #restartButton {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 630px;
+  left: 80px;
+}
+
+#restartButton {
+  height: 70px;
+  width: 70px;
+  top: 610px;
+  left: 1300px;
+}
 #splash, #win-splash, #lose-splash, #level-splash {
   position: absolute;
   opacity: 0.95;
