@@ -2,12 +2,11 @@
 
 [Go Green Link](https://huijunyam.github.io/GoGreen/)
 
-![image of game design](./images/game_design.png)
-
 ##Background
-Go Green is an educational game that teaches people how to sort and recycle the trash correctly. The game is designed based on the soccer game theme. There will be three bins labeled as trash, compost, and recycle setting up in front of the player. The users will use keypad(up, down, left, right) to control and move the trash into the correct bin. A scoreboard will display the score of the player based on the correct sorted trash.  
+Go Green is an educational game that teaches people how to sort and recycle the trash correctly. The game is designed based on the soccer game theme and it has 10 rounds per game. There will be three bins labeled as trash, compost, and recycle setting up in front of the player. The player will use keypad(up, down, left, right) to control and move the trash into the correct bin. The goalkeeper will try to catch the trash to prevent player from recycling. A scoreboard will display the score of the player based on the correct sorted trash. The player will lose the game if the player sorted the trash incorrectly for more than three times.    
 
 For more information about the recyclable items, please visit this [recycle list] (https://www.buffalo.edu/recycling/recyclable.htm)
+![image of game design](./images/game_design.png)
 
 ##Architecture and Technologies
 Go Green is created with Javascript, HTML5, CSS3, and `howler.js`
@@ -17,7 +16,7 @@ Go Green is created with Javascript, HTML5, CSS3, and `howler.js`
 - Webpack for bundling all the scripts file
 
 ##Implementation
-Go Green uses the HTML Canvas to draw graphics via Javascript. It uses `requestAnimationFrame` to constantly render and update the canvas to provide animation for the game.
+Go Green uses the HTML Canvas to draw graphics via Javascript. It uses `requestAnimationFrame` to constantly render and update the canvas to provide animation in a cross browser way for the game.
 ```
 let w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame ||
@@ -31,25 +30,29 @@ let win = () => {
   const victory = document.getElementById("victory");
   victory.innerHTML = `You have a score of ${score + 10}`;
   winSplash.style.visibility = "visible";
-  document.addEventListener("keydown", (e) => {
-    if (e.keyCode === 32) {
-      const winSplashMessage = document.getElementById("win-splash");
-      winSplashMessage.style.visibility = "hidden";
-      restart();
-    }
-  });
 };
 ```
 
-Go Green uses `howler.js` to create the sound effect if users sort the trash correctly or wrongly.
+Go Green uses `howler.js` to create the sound effect if player sorts the trash correctly or wrongly. There is a sound button that can mute the sound. A 'click' event listener is attached to the button and `clickHandler` function will be triggered when clicking occurred. The image of the sound button will be changed and rendered accordingly.   
 ```
-let savedAudio = new Howl({
-  src: ['./sounds/ball_saved.mp3']
-});
-
-let goalAudio = new Howl({
-  src: ['./sounds/goal.mp3']
-});
+//change the displayed image of sound button
+let clickHandler = () => {
+  if (elementIsClicked === false) {
+    document.getElementById("muteButton").src = "./images/mute.png";
+    elementIsClicked = true;
+  } else {
+    document.getElementById("muteButton").src = "./images/unmute.png";
+    elementIsClicked = false;
+  }
+};
+```
+```
+//condition checking the sound shoud be muted or played
+if (elementIsClicked === true) {
+          goalAudio.mute();
+        } else {
+          goalAudio.play();
+        }
 ```
 
 ##Future Plan
