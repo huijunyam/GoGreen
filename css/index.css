@@ -3,6 +3,9 @@
 /*background: -o-linear-gradient(bottom right, #00d0ff, yellow); */
 /*background: -moz-linear-gradient(bottom right, #00d0ff, yellow); */
 /*background: linear-gradient(to bottom right, #00d0ff, yellow); */
+body {
+  background: #2D882D;
+}
 
 img {
   display: block;
@@ -53,8 +56,8 @@ nav {
 
   /*opacity: 0.95;*/
   /*width: 1000px;*/
-  width: 1350px;
-  height: 500px;
+  width: 1355px;
+  height: 510px;
   /*margin: 50px 200px;*/
   border-radius: 5px;
   margin-left: 35px;
